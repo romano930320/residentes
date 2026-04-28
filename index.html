@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso Residentes | Video Certificacion</title>
+    <title>Curso Residentes | ExamenNetser</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -21,6 +21,7 @@
             position: relative;
         }
 
+        /* Partículas animadas de fondo */
         .particles {
             position: fixed;
             top: 0;
@@ -57,6 +58,7 @@
             }
         }
 
+        /* Círculos de fondo */
         .bg-shape {
             position: fixed;
             border-radius: 50%;
@@ -114,6 +116,7 @@
             border-color: rgba(51, 153, 225, 0.8);
         }
 
+        /* Logo centrado */
         .logo-wrapper {
             text-align: center;
             margin-bottom: 24px;
@@ -273,6 +276,7 @@
     </style>
 </head>
 <body>
+    <!-- Partículas animadas -->
     <div class="particles" id="particles"></div>
     <div class="bg-shape bg-shape-1"></div>
     <div class="bg-shape bg-shape-2"></div>
@@ -281,7 +285,7 @@
         <div id="loginPanel" class="login-card">
             <div class="logo-wrapper">
                 <div class="logo-circle">
-                    <img src="/public/assets/logo%20blanco%20con%20groupvf.png" alt="Logo" onerror="this.style.display='none'">
+                    <img src="https://exam-netser.vercel.app/assets/logo.png" alt="Logo" onerror="this.style.display='none'">
                 </div>
             </div>
             <div class="login-title">Bienvenido</div>
@@ -307,7 +311,7 @@
         <div id="registerPanel" class="login-card hidden">
             <div class="logo-wrapper">
                 <div class="logo-circle">
-                    <img src="/public/assets/logo%20blanco%20con%20groupvf.png" alt="Logo" onerror="this.style.display='none'">
+                    <img src="https://exam-netser.vercel.app/assets/logo.png" alt="Logo" onerror="this.style.display='none'">
                 </div>
             </div>
             <div class="login-title">Crear Cuenta</div>
@@ -358,6 +362,7 @@
     </div>
 
     <script>
+        // Partículas animadas
         function createParticles() {
             const container = document.getElementById('particles');
             for (let i = 0; i < 50; i++) {
