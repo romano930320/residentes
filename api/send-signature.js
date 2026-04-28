@@ -6,14 +6,14 @@ export default async function handler(req, res) {
     }
     try {
         const { empresa, nombreCompleto, email, fecha } = req.body;
-        const adminEmail = 'robertomacedonorato@gmail.com'; // FIX 1: sin formato Markdown
+        const adminEmail = 'robertomacedonorato@gmail.com';
         const apiKey = process.env.BOLDSIGN_API_KEY;
 
         if (!apiKey) {
             return res.status(500).json({ error: 'API Key no configurada' });
         }
 
-        // FIX 2: Generar un PDF real con pdf-lib
+        // Generar PDF real
         const pdfDoc = await PDFDocument.create();
         const page = pdfDoc.addPage([600, 400]);
         const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
@@ -57,7 +57,7 @@ export default async function handler(req, res) {
                 }
             ],
             CC: [{ EmailAddress: adminEmail }],
-            Files: [{ Name: 'certificado.pdf', FileBase64: pdfBase64 }] // FIX 3: FileBase64 no DocumentBase64
+            Files: [{ Name: 'certificado.pdf', FileBase64: pdfBase64 }]
         };
 
         console.log('Enviando a BoldSign:', JSON.stringify(requestBody, null, 2));
