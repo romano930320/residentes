@@ -18,8 +18,9 @@ export default async function handler(req, res) {
             return res.status(400).json({ error: 'Todos los campos son obligatorios' });
         }
 
+        // CAMBIADO: evaluaciones_tecnicas.users -> public.users
         const existingUser = await pool.query(
-            'SELECT id FROM evaluaciones_tecnicas.users WHERE email = $1', 
+            'SELECT id FROM public.users WHERE email = $1', 
             [email.toLowerCase()]
         );
 
@@ -29,8 +30,9 @@ export default async function handler(req, res) {
 
         const hashedPassword = await bcrypt.hash(password, 10);
 
+        // CAMBIADO: evaluaciones_tecnicas.users -> public.users
         const result = await pool.query(
-            `INSERT INTO evaluaciones_tecnicas.users (first_name, last_name, email, password, profile, country) 
+            `INSERT INTO public.users (first_name, last_name, email, password, profile, country) 
              VALUES ($1, $2, $3, $4, $5, $6) 
              RETURNING id, first_name, last_name, email, profile`,
             [first_name, last_name, email.toLowerCase(), hashedPassword, profile, country || 'No especificado']
