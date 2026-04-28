@@ -1,72 +1,50 @@
 export default async function handler(req, res) {
-    // 1. Solo aceptar peticiones POST
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Método no permitido' });
     }
 
     try {
-        // 2. Obtener datos del cuerpo de la petición
         const { empresa, nombreCompleto, email, fecha } = req.body;
         const adminEmail = 'robertomacedonorato@gmail.com';
         const apiKey = process.env.BOLDSIGN_API_KEY;
 
-        // 3. Validar que la API Key existe
         if (!apiKey) {
-            return res.status(500).json({ error: 'API Key de BoldSign no configurada en el servidor.' });
+            return res.status(500).json({ error: 'API Key no configurada' });
         }
 
-        // --- Crear un PDF simple pero válido en Base64 ---
-        // Este es un PDF de una página con texto de ejemplo.
-        // La librería 'pdf-lib' sería más robusta, pero lo mantenemos simple por ahora.
-        const pdfText = `
-            CERTIFICADO DE FINALIZACIÓN
-            Curso Residentes Netser
-
-            El presente certifica que: ${nombreCompleto}
-            Ha completado el curso en representación de: ${empresa}
-            Fecha de finalización: ${fecha}
-
-            Firma Digital: ___________________
-        `;
-        // Convertir el texto a Base64. NOTA: Para producción, es mejor generar un PDF real.
+        // Texto del PDF
+        const pdfText = `CERTIFICADO CURSO RESIDENTES NETSER
+Certifica que: ${nombreCompleto}
+Empresa: ${empresa}
+Fecha: ${fecha}
+Firma Digital: ___________________`;
+        
         const pdfBase64 = Buffer.from(pdfText).toString('base64');
-        // ------------------------------------------------
 
-        // 4. Construir el cuerpo de la petición según la documentación de BoldSign
         const requestBody = {
             Title: `Certificado - ${nombreCompleto}`,
-            Message: `Hola ${nombreCompleto}, por favor completa tu firma digital para certificar la finalización del curso.`,
+            Message: `Hola ${nombreCompleto}, firma para certificar el curso.`,
             Signers: [
                 {
                     Name: nombreCompleto,
                     EmailAddress: email,
                     SignerOrder: 1,
-                    // --- CORRECCIÓN PRINCIPAL: FormFields debe estar dentro del objeto Signer ---
                     FormFields: [
                         {
-                            Id: "Signature",
+                            Id: "signature",
                             FieldType: "Signature",
                             PageNumber: 1,
-                            Bounds: {
-                                X: 100,
-                                Y: 300,
-                                Width: 200,
-                                Height: 50
-                            }
+                            Bounds: { X: 100, Y: 300, Width: 200, Height: 50 }
                         }
                     ]
                 }
             ],
             CC: [{ EmailAddress: adminEmail }],
-            Files: [
-                {
-                    Name: `certificado_${Date.now()}.pdf`,
-                    DocumentBase64: pdfBase64
-                }
-            ]
+            Files: [{ Name: `certificado.pdf`, DocumentBase64: pdfBase64 }]
         };
 
-        // 5. Enviar la petición a la API de BoldSign
+        console.log('Enviando a BoldSign:', JSON.stringify(requestBody, null, 2));
+
         const response = await fetch('https://api.boldsign.com/v1/document/send', {
             method: 'POST',
             headers: {
@@ -76,32 +54,24 @@ export default async function handler(req, res) {
             body: JSON.stringify(requestBody)
         });
 
-        // 6. Procesar la respuesta
         const data = await response.json();
 
+        // Loggear la respuesta completa de BoldSign
+        console.log('Respuesta BoldSign:', JSON.stringify(data, null, 2));
+
         if (!response.ok) {
-            // Loggear el error detallado para depuración
-            console.error('Error detallado de BoldSign:', JSON.stringify(data, null, 2));
-            return res.status(response.status).json({
-                error: 'Error al comunicarse con BoldSign',
-                details: data
+            // Devolver el error específico de BoldSign
+            return res.status(response.status).json({ 
+                error: 'BoldSign error', 
+                details: data,
+                status: response.status
             });
         }
 
-        // 7. Respuesta exitosa
-        console.log('Documento creado exitosamente:', data.documentId);
-        return res.status(200).json({
-            success: true,
-            message: `Solicitud de firma enviada a ${email}. Revisa tu bandeja de entrada.`,
-            documentId: data.documentId
-        });
+        res.json({ success: true, message: `Correo enviado a ${email}` });
 
     } catch (error) {
-        // Capturar cualquier error inesperado (de red, etc.)
-        console.error('Error interno del servidor:', error);
-        return res.status(500).json({
-            error: 'Error interno del servidor',
-            message: error.message
-        });
+        console.error('Error:', error);
+        res.status(500).json({ error: error.message });
     }
 }
