@@ -12,7 +12,6 @@
             background: linear-gradient(135deg, #2563eb 0%, #1e40af 50%, #64748b 100%);
             min-height: 100vh;
         }
-        /* Navbar más compacto */
         .navbar {
             background: white;
             padding: 0.6rem 1.5rem;
@@ -113,22 +112,28 @@
             display: block;
             background: #000;
         }
+        
+        /* === BARRA DE PROGRESO AZUL TRANSPARENTE === */
         .watch-status {
-            background: #f8f9fa;
+            background: rgba(37, 99, 235, 0.15);
+            backdrop-filter: blur(4px);
             padding: 10px 12px;
             text-align: center;
             font-size: 13px;
             font-weight: 500;
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid rgba(37, 99, 235, 0.3);
+            color: #1e3a8a;
         }
         .watch-status.completed { 
-            background: #d4edda; 
-            color: #155724; 
+            background: rgba(22, 163, 74, 0.2);
+            color: #166534;
+            border-top-color: rgba(22, 163, 74, 0.4);
         }
         .watch-status.pending { 
-            background: #fff3cd; 
-            color: #856404; 
+            background: rgba(37, 99, 235, 0.15);
+            color: #1e3a8a;
         }
+        
         .signature-body { 
             padding: 16px; 
         }
@@ -219,7 +224,6 @@
 
     <div class="container">
         <div class="main-layout">
-            <!-- Video -->
             <div class="video-card">
                 <div class="video-header">
                     <i class="fas fa-play-circle"></i> Residentes Netser
@@ -232,7 +236,6 @@
                 </div>
             </div>
 
-            <!-- Formulario de firma -->
             <div class="signature-card">
                 <div class="signature-header">
                     <i class="fas fa-signature"></i> Firma Digital
@@ -274,7 +277,6 @@
             setTimeout(() => toast.remove(), 3000);
         }
 
-        // Cargar usuario del localStorage
         const user = localStorage.getItem('user');
         if (user) {
             usuarioActual = JSON.parse(user);
