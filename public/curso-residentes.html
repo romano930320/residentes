@@ -5,393 +5,210 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Curso Residentes | ExamenNetser</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
         body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 50%, #64748b 100%);
             min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
         }
-
-        /* Partículas animadas de fondo */
-        .particles {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
-        }
-
-        .particle {
-            position: absolute;
-            background: rgba(37, 99, 235, 0.2);
-            border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.3; }
-            25% { transform: translateY(-40px) translateX(30px); opacity: 0.6; }
-            50% { transform: translateY(40px) translateX(-30px); opacity: 0.4; }
-            75% { transform: translateY(-20px) translateX(-15px); opacity: 0.7; }
-        }
-
-        /* Círculos de fondo pulsantes */
-        .bg-shape {
-            position: fixed;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .bg-shape-1 {
-            width: 500px;
-            height: 500px;
-            top: -200px;
-            right: -150px;
-            animation: pulse 10s infinite;
-        }
-
-        .bg-shape-2 {
-            width: 400px;
-            height: 400px;
-            bottom: -150px;
-            left: -150px;
-            animation: pulse 12s infinite reverse;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.3; }
-            50% { transform: scale(1.1); opacity: 0.6; }
-        }
-
-        /* Navbar glassmorfismo */
         .navbar {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 0.8rem 1.5rem;
+            background: white;
+            padding: 0.6rem 1.5rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
-            z-index: 10;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .logo i {
-            font-size: 28px;
-            color: #3399E1;
-        }
-
-        .logo span {
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-            letter-spacing: -0.5px;
-        }
-
+        .logo { height: 40px; }
         .nav-links {
             display: flex;
             align-items: center;
             gap: 15px;
         }
-
         .nav-links a {
             text-decoration: none;
-            color: rgba(255, 255, 255, 0.8);
+            color: #666;
             padding: 6px 14px;
             font-weight: 500;
             font-size: 14px;
-            border-radius: 10px;
+            border-radius: 8px;
             transition: all 0.3s;
         }
-
-        .nav-links a.active {
-            background: rgba(37, 99, 235, 0.8);
-            color: white;
+        .nav-links a.active { 
+            background: #2563eb; 
+            color: white; 
         }
-
-        .nav-links a:hover {
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
         .user-info {
             display: flex;
             align-items: center;
-            gap: 10px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(4px);
-            padding: 5px 15px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            gap: 8px;
+            background: #f0f0f0;
+            padding: 4px 12px;
+            border-radius: 30px;
         }
-
         .user-avatar {
-            width: 32px;
-            height: 32px;
-            background: linear-gradient(135deg, #2563eb, #3399E1);
+            width: 28px; height: 28px;
+            background: #2563eb;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 12px;
         }
-
         .user-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
-            color: white;
+            color: #333;
         }
-
-        .logout-btn {
-            background: rgba(220, 38, 38, 0.2);
-            border: none;
-            color: #fca5a5;
+        .logout-btn { 
+            background: none; 
+            border: none; 
+            color: #dc2626; 
             cursor: pointer;
             font-size: 13px;
-            padding: 5px 10px;
-            border-radius: 20px;
-            transition: all 0.2s;
+            padding: 4px 8px;
+            border-radius: 6px;
         }
-
         .logout-btn:hover {
-            background: rgba(220, 38, 38, 0.5);
-            color: white;
+            background: #fee2e2;
         }
-
-        .container {
-            max-width: 1300px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 10;
+        .container { 
+            max-width: 1300px; 
+            margin: 0 auto; 
+            padding: 20px; 
         }
-
         .main-layout {
             display: grid;
-            grid-template-columns: 1fr 340px;
-            gap: 25px;
+            grid-template-columns: 1fr 320px;
+            gap: 20px;
         }
-
-        @media (max-width: 900px) {
-            .main-layout {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 900px) { 
+            .main-layout { 
+                grid-template-columns: 1fr; 
+            } 
         }
-
-        /* Tarjetas con efecto glassmorfismo */
         .video-card, .signature-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border-radius: 24px;
+            background: white;
+            border-radius: 16px;
             overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
         }
-
-        .video-card:hover, .signature-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
-            border-color: rgba(51, 153, 225, 0.4);
-        }
-
         .video-header, .signature-header {
-            background: rgba(255, 255, 255, 0.05);
-            color: white;
-            padding: 14px 18px;
+            background: white;
+            color: #2563eb;
+            padding: 12px 16px;
             font-weight: 600;
-            font-size: 16px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 15px;
+            border-bottom: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
-
-        .video-header i, .signature-header i {
-            color: #3399E1;
-        }
-
-        video {
-            width: 100%;
+        video { 
+            width: 100%; 
             display: block;
             background: #000;
-            border-radius: 0;
         }
-
-        /* Barra de progreso moderna */
+        
+        /* === BARRA DE PROGRESO AZUL TRANSPARENTE === */
         .watch-status {
-            background: rgba(51, 153, 225, 0.15);
-            backdrop-filter: blur(8px);
-            padding: 12px 16px;
+            background: rgba(37, 99, 235, 0.15);
+            backdrop-filter: blur(4px);
+            padding: 10px 12px;
             text-align: center;
             font-size: 13px;
             font-weight: 500;
-            border-top: 1px solid rgba(51, 153, 225, 0.3);
-            color: rgba(255, 255, 255, 0.9);
-            transition: all 0.3s;
+            border-top: 1px solid rgba(37, 99, 235, 0.3);
+            color: #1e3a8a;
         }
-
-        .watch-status.completed {
+        .watch-status.completed { 
             background: rgba(22, 163, 74, 0.2);
-            color: #86efac;
+            color: #166534;
             border-top-color: rgba(22, 163, 74, 0.4);
         }
-
-        .watch-status.pending {
+        .watch-status.pending { 
             background: rgba(37, 99, 235, 0.15);
-            color: rgba(255, 255, 255, 0.9);
+            color: #1e3a8a;
         }
-
-        .watch-status i {
-            margin-right: 6px;
+        
+        .signature-body { 
+            padding: 16px; 
         }
-
-        .signature-body {
-            padding: 20px;
+        .form-group { 
+            margin-bottom: 14px; 
         }
-
-        .form-group {
-            margin-bottom: 16px;
+        .form-group label { 
+            font-size: 12px; 
+            font-weight: 600; 
+            color: #555; 
+            display: block; 
+            margin-bottom: 4px; 
         }
-
-        .form-group label {
-            font-size: 12px;
-            font-weight: 600;
-            color: rgba(255, 255, 255, 0.7);
-            display: block;
-            margin-bottom: 6px;
-            letter-spacing: 0.5px;
-        }
-
         .form-group input {
             width: 100%;
-            padding: 10px 14px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 12px;
-            font-size: 14px;
-            background: rgba(255, 255, 255, 0.1);
-            color: white;
-            transition: all 0.3s;
+            padding: 8px 10px;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 13px;
+            background: #f8fafc;
         }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #3399E1;
-            background: rgba(51, 153, 225, 0.15);
-        }
-
         .form-group input:disabled {
-            background: rgba(255, 255, 255, 0.05);
-            color: rgba(255, 255, 255, 0.5);
-            cursor: not-allowed;
+            background: #f1f5f9;
+            color: #94a3b8;
         }
-
         .sign-btn {
             background: linear-gradient(135deg, #2563eb, #1e40af);
             color: white;
             border: none;
-            padding: 12px;
-            border-radius: 14px;
+            padding: 10px;
+            border-radius: 8px;
             width: 100%;
             cursor: pointer;
             font-weight: 600;
-            font-size: 15px;
-            transition: all 0.3s;
-            margin-top: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
         }
-
         .sign-btn:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
-
-        .sign-btn:disabled {
-            background: rgba(100, 116, 139, 0.5);
-            cursor: not-allowed;
+        .sign-btn:disabled { 
+            background: #cbd5e1; 
+            cursor: not-allowed; 
             transform: none;
         }
-
-        .footer-note {
-            font-size: 11px;
-            text-align: center;
-            color: rgba(255, 255, 255, 0.5);
-            margin-top: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+        .footer-note { 
+            font-size: 10px; 
+            text-align: center; 
+            color: #94a3b8; 
+            margin-top: 12px; 
         }
-
         .toast {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(8px);
-            padding: 12px 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            background: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             transform: translateX(400px);
             transition: transform 0.3s;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 500;
             z-index: 1000;
-            display: flex;
-            align-items: center;
-            gap: 10px;
         }
-
-        .toast.show {
-            transform: translateX(0);
-        }
-
-        .toast.success {
-            border-left: 4px solid #16a34a;
-            color: #166534;
-        }
-
-        .toast.error {
-            border-left: 4px solid #dc2626;
-            color: #b91c1c;
-        }
+        .toast.show { transform: translateX(0); }
+        .toast.success { border-left: 4px solid #16a34a; color: #16a34a; }
+        .toast.error { border-left: 4px solid #dc2626; color: #dc2626; }
     </style>
 </head>
 <body>
-    <!-- Partículas de fondo -->
-    <div class="particles" id="particles"></div>
-    <div class="bg-shape bg-shape-1"></div>
-    <div class="bg-shape bg-shape-2"></div>
-
-    <!-- Navbar mejorado -->
     <nav class="navbar">
-        <div class="logo">
-            <i class="fas fa-graduation-cap"></i>
-            <span>ExamenNetser</span>
+        <div class="logo-container">
+            <img src="https://exam-netser.vercel.app/assets/logo.png" alt="Logo" class="logo" onerror="this.style.display='none'">
         </div>
         <div class="nav-links">
             <a href="curso-residentes.html" class="active">🎥 Curso Residentes</a>
@@ -399,7 +216,7 @@
                 <div class="user-avatar" id="userAvatar">E</div>
                 <span class="user-name" id="userName">Cargando...</span>
                 <button class="logout-btn" onclick="cerrarSesion()" title="Cerrar sesión">
-                    <i class="fas fa-sign-out-alt"></i> Salir
+                    <i class="fas fa-sign-out-alt"></i>
                 </button>
             </div>
         </div>
@@ -407,36 +224,33 @@
 
     <div class="container">
         <div class="main-layout">
-            <!-- Tarjeta de video -->
             <div class="video-card">
                 <div class="video-header">
                     <i class="fas fa-play-circle"></i> Residentes Netser
                 </div>
                 <video id="videoPlayer" controls>
                     <source src="https://1pu2mkw0da1vc7lq.public.blob.vercel-storage.com/videos/Residentes%20v2%20-%20Hecho%20con%20Microsoft%20Clipchamp_1777335302990.mp4" type="video/mp4">
-                    Tu navegador no soporta el elemento de video.
                 </video>
                 <div class="watch-status pending" id="estadoVisualizacion">
-                    <i class="fas fa-hourglass-half"></i> Progreso: 0% - Debes ver el video completo para firmar
+                    📺 Progreso: 0% - Debes ver el video completo para firmar
                 </div>
             </div>
 
-            <!-- Tarjeta de firma -->
             <div class="signature-card">
                 <div class="signature-header">
                     <i class="fas fa-signature"></i> Firma Digital
                 </div>
                 <div class="signature-body">
                     <div class="form-group">
-                        <label><i class="fas fa-user"></i> Nombre Completo</label>
+                        <label>Nombre Completo</label>
                         <input type="text" id="nombreCompleto" disabled>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-building"></i> Empresa / Institución</label>
+                        <label>Empresa / Institución</label>
                         <input type="text" id="empresaResidente" placeholder="Nombre de la empresa" disabled>
                     </div>
                     <div class="form-group">
-                        <label><i class="fas fa-calendar-alt"></i> Fecha</label>
+                        <label>Fecha</label>
                         <input type="text" id="fechaVisualizacion" disabled>
                     </div>
                     <button class="sign-btn" id="btnFirmar" disabled>
@@ -451,64 +265,32 @@
     </div>
 
     <script>
-        // Crear partículas animadas
-        function createParticles() {
-            const container = document.getElementById('particles');
-            for (let i = 0; i < 60; i++) {
-                const particle = document.createElement('div');
-                particle.classList.add('particle');
-                const size = Math.random() * 8 + 2;
-                particle.style.width = `${size}px`;
-                particle.style.height = `${size}px`;
-                particle.style.left = `${Math.random() * 100}%`;
-                particle.style.top = `${Math.random() * 100}%`;
-                particle.style.animationDelay = `${Math.random() * 20}s`;
-                particle.style.animationDuration = `${15 + Math.random() * 15}s`;
-                container.appendChild(particle);
-            }
-        }
-        createParticles();
-
         let usuarioActual = null;
         let videoCompletado = false;
 
         function mostrarMensaje(mensaje, tipo) {
             const toast = document.createElement('div');
             toast.className = `toast ${tipo}`;
-            toast.innerHTML = `<i class="fas ${tipo === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i><span>${mensaje}</span>`;
+            toast.innerHTML = `<span>${mensaje}</span>`;
             document.body.appendChild(toast);
             setTimeout(() => toast.classList.add('show'), 10);
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => toast.remove(), 300);
-            }, 4000);
+            setTimeout(() => toast.remove(), 3000);
         }
 
-        // Obtener usuario del localStorage
         const user = localStorage.getItem('user');
         if (user) {
             usuarioActual = JSON.parse(user);
             document.getElementById('userName').textContent = `${usuarioActual.first_name} ${usuarioActual.last_name}`;
             document.getElementById('userAvatar').textContent = usuarioActual.first_name.charAt(0).toUpperCase();
             document.getElementById('nombreCompleto').value = `${usuarioActual.first_name} ${usuarioActual.last_name}`;
-            document.getElementById('fechaVisualizacion').value = new Date().toLocaleDateString('es-ES', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+            document.getElementById('fechaVisualizacion').value = new Date().toLocaleDateString('es-ES');
         } else {
-            mostrarMensaje('Por favor inicia sesión primero', 'error');
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 2000);
+            window.location.href = 'index.html';
         }
 
         function cerrarSesion() {
             localStorage.clear();
-            mostrarMensaje('Sesión cerrada correctamente', 'success');
-            setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1000);
+            window.location.href = 'index.html';
         }
 
         const video = document.getElementById('videoPlayer');
@@ -516,42 +298,29 @@
         const btnFirmar = document.getElementById('btnFirmar');
         const inputEmpresa = document.getElementById('empresaResidente');
 
-        // Seguimiento del progreso del video
         video.addEventListener('timeupdate', () => {
-            if (video.duration && !videoCompletado) {
-                const porcentaje = (video.currentTime / video.duration) * 100;
-                if (porcentaje >= 95) {
-                    videoCompletado = true;
-                    estadoDiv.className = 'watch-status completed';
-                    estadoDiv.innerHTML = '<i class="fas fa-check-circle"></i> Video completado - Ya puedes firmar el documento';
-                    inputEmpresa.disabled = false;
-                    btnFirmar.disabled = false;
-                } else {
-                    estadoDiv.innerHTML = `<i class="fas fa-hourglass-half"></i> Progreso: ${Math.round(porcentaje)}% - Debes ver el video completo para firmar`;
-                }
-            }
-        });
-
-        video.addEventListener('ended', () => {
-            if (!videoCompletado) {
+            const porcentaje = (video.currentTime / video.duration) * 100;
+            if (porcentaje >= 95 && !videoCompletado) {
                 videoCompletado = true;
                 estadoDiv.className = 'watch-status completed';
-                estadoDiv.innerHTML = '<i class="fas fa-check-circle"></i> Video completado - Ya puedes firmar el documento';
+                estadoDiv.innerHTML = '✅ Video completado - Ya puedes firmar';
                 inputEmpresa.disabled = false;
                 btnFirmar.disabled = false;
+            } else if (!videoCompletado) {
+                estadoDiv.innerHTML = `📺 Progreso: ${Math.round(porcentaje)}% - Debes ver el video completo`;
             }
         });
 
         async function firmarConBoldSign() {
             const empresa = document.getElementById('empresaResidente').value.trim();
-            if (!empresa) {
-                mostrarMensaje('Ingresa el nombre de tu empresa', 'error');
-                return;
+            if (!empresa) { 
+                mostrarMensaje('Ingresa el nombre de tu empresa', 'error'); 
+                return; 
             }
-
+            
             btnFirmar.disabled = true;
-            btnFirmar.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Enviando a BoldSign...';
-
+            btnFirmar.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Enviando...';
+            
             try {
                 const response = await fetch('/api/send-signature', {
                     method: 'POST',
@@ -563,24 +332,18 @@
                         fecha: document.getElementById('fechaVisualizacion').value
                     })
                 });
-
+                
                 const data = await response.json();
-
-                if (!response.ok) {
-                    throw new Error(data.error || data.details?.message || 'Error al enviar');
-                }
-
-                mostrarMensaje(`✅ Documento enviado a ${usuarioActual.email}. Revisa tu bandeja.`, 'success');
-
-                // Resetear formulario
-                document.getElementById('empresaResidente').value = '';
+                if (!response.ok) throw new Error(data.error || data.details?.message || 'Error al enviar');
+                
+                mostrarMensaje(`✅ Correo enviado a ${usuarioActual.email}. Revisa tu bandeja.`, 'success');
+                inputEmpresa.value = '';
                 btnFirmar.disabled = true;
                 videoCompletado = false;
                 video.currentTime = 0;
                 video.load();
                 estadoDiv.className = 'watch-status pending';
-                estadoDiv.innerHTML = '<i class="fas fa-hourglass-half"></i> Progreso: 0% - Debes ver el video completo para firmar';
-
+                
             } catch (error) {
                 mostrarMensaje(error.message, 'error');
                 btnFirmar.disabled = false;
