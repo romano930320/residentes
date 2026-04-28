@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Curso Residentes | Acceso</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        body {
+            background: linear-gradient(135deg, #2563eb 0%, #1e40af 50%, #64748b 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            width: 100%;
+        }
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #2563eb;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #555;
+        }
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+        .btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(37, 99, 235, 0.4);
+        }
+        .btn-secondary {
+            background: #64748b;
+            margin-top: 10px;
+        }
+        .switch-link {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .switch-link a {
+            color: #2563eb;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        .error-message {
+            background: #fef2f2;
+            color: #dc2626;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: white;
+            padding: 10px 18px;
+            border-radius: 8px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 1100;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transform: translateX(400px);
+            transition: transform 0.3s;
+            font-size: 13px;
+        }
+        .toast.show { transform: translateX(0); }
+        .toast.success { border-left: 4px solid #16a34a; color: #16a34a; }
+        .toast.error { border-left: 4px solid #dc2626; color: #dc2626; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Login Panel -->
+        <div id="loginPanel" class="card">
+            <div class="header">
+                <h1><i class="fas fa-graduation-cap"></i> Curso Residentes</h1>
+                <p>Inicia sesión para acceder al curso</p>
+            </div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn">Iniciar Sesión</button>
+                <div class="switch-link">
+                    <a onclick="showRegister()">¿No tienes cuenta? Regístrate</a>
+                </div>
+            </form>
+            <div id="loginError" class="error-message hidden"></div>
+        </div>
+
+        <!-- Register Panel -->
+        <div id="registerPanel" class="card hidden">
+            <div class="header">
+                <h1><i class="fas fa-user-plus"></i> Crear Cuenta</h1>
+                <p>Regístrate para acceder al curso</p>
+            </div>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="regNombre" required>
+                </div>
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" id="regApellido" required>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="regPassword" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label>Perfil</label>
+                    <select id="regProfile">
+                        <option value="client">Client</option>
+                        <option value="enterprise">Enterprise</option>
+                        <option value="both">Both</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>País</label>
+                    <select id="regCountry">
+                        <option value="colombia">Colombia</option>
+                        <option value="mexico">México</option>
+                        <option value="argentina">Argentina</option>
+                        <option value="chile">Chile</option>
+                        <option value="peru">Perú</option>
+                        <option value="espana">España</option>
+                        <option value="usa">Estados Unidos</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">Registrarse</button>
+                <div class="switch-link">
+                    <a onclick="showLogin()">¿Ya tienes cuenta? Inicia Sesión</a>
+                </div>
+            </form>
+            <div id="registerError" class="error-message hidden"></div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE_URL = '/api';
+
+        function mostrarMensaje(mensaje, tipo) {
+            const toast = document.createElement('div');
+            toast.className = `toast ${tipo}`;
+            toast.innerHTML = `<i class="fas ${tipo === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i><span>${mensaje}</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.classList.add('show'), 10);
+            setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 4000);
+        }
+
+        function showLogin() {
+            document.getElementById('loginPanel').classList.remove('hidden');
+            document.getElementById('registerPanel').classList.add('hidden');
+        }
+
+        function showRegister() {
+            document.getElementById('loginPanel').classList.add('hidden');
+            document.getElementById('registerPanel').classList.remove('hidden');
+        }
+
+        // Registro
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const userData = {
+                first_name: document.getElementById('regNombre').value,
+                last_name: document.getElementById('regApellido').value,
+                email: document.getElementById('regEmail').value,
+                password: document.getElementById('regPassword').value,
+                profile: document.getElementById('regProfile').value,
+                country: document.getElementById('regCountry').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Error al registrar');
+                mostrarMensaje('Usuario registrado exitosamente', 'success');
+                showLogin();
+            } catch (error) {
+                document.getElementById('registerError').textContent = error.message;
+                document.getElementById('registerError').classList.remove('hidden');
+                setTimeout(() => document.getElementById('registerError').classList.add('hidden'), 3000);
+            }
+        });
+
+        // Login
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const credentials = {
+                email: document.getElementById('loginEmail').value,
+                password: document.getElementById('loginPassword').value
+            };
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(credentials)
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Credenciales inválidas');
+                
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                mostrarMensaje(`Bienvenido ${data.user.first_name}!`, 'success');
+                setTimeout(() => {
+                    window.location.href = 'curso-residentes.html';
+                }, 1000);
+            } catch (error) {
+                document.getElementById('loginError').textContent = error.message;
+                document.getElementById('loginError').classList.remove('hidden');
+                setTimeout(() => document.getElementById('loginError').classList.add('hidden'), 3000);
+            }
+        });
+    </script>
+</body>
+</html>
