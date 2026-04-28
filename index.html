@@ -3,98 +3,311 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso Residentes | Acceso</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <title>Curso Residentes | ExamenNetser</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
         body {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 50%, #64748b 100%);
+            min-height: 100vh;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Partículas animadas de fondo */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(37, 99, 235, 0.4);
+            border-radius: 50%;
+            animation: float 15s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-30px) translateX(20px);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(30px) translateX(-20px);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-15px) translateX(-10px);
+                opacity: 0.7;
+            }
+        }
+
+        /* Círculos de fondo */
+        .bg-shape {
+            position: fixed;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-shape-1 {
+            width: 500px;
+            height: 500px;
+            top: -200px;
+            right: -150px;
+            animation: pulse 8s infinite;
+        }
+
+        .bg-shape-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
+            left: -150px;
+            animation: pulse 10s infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .container {
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
+            position: relative;
+            z-index: 10;
         }
-        .container { max-width: 500px; width: 100%; }
-        .card {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-        }
-        .header { text-align: center; margin-bottom: 30px; }
-        .header h1 { color: #2563eb; font-size: 24px; margin-bottom: 10px; }
-        .form-group { margin-bottom: 20px; }
-        label { display: block; margin-bottom: 8px; font-weight: 600; color: #555; }
-        input, select {
+
+        .login-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 40px 32px;
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e2e8f0;
-            border-radius: 10px;
-            font-size: 16px;
+            max-width: 480px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
         }
-        input:focus { outline: none; border-color: #2563eb; }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.6);
+            border-color: rgba(37, 99, 235, 0.5);
+        }
+
+        /* Logo centrado */
+        .logo-wrapper {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
+        .logo-circle {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            animation: glow 2s infinite alternate;
+        }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(37, 99, 235, 0.5); }
+            to { box-shadow: 0 0 25px rgba(37, 99, 235, 0.8); }
+        }
+
+        .logo-circle img {
+            width: 50px;
+            height: 50px;
+            object-fit: contain;
+        }
+
+        .logo-circle i {
+            font-size: 40px;
+            color: white;
+        }
+
+        .login-title {
+            text-align: center;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 16px;
+            font-size: 15px;
+            color: white;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+            background: rgba(37, 99, 235, 0.2);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
         .btn {
             width: 100%;
             padding: 12px;
             background: linear-gradient(135deg, #2563eb, #1e40af);
-            color: white;
             border: none;
-            border-radius: 10px;
+            border-radius: 16px;
             font-size: 16px;
             font-weight: 600;
+            color: white;
             cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 8px;
         }
-        .btn:hover { transform: translateY(-2px); }
-        .btn-secondary { background: #64748b; margin-top: 10px; }
-        .switch-link { text-align: center; margin-top: 20px; }
-        .switch-link a { color: #2563eb; text-decoration: none; cursor: pointer; }
-        .hidden { display: none; }
-        .error-message {
-            background: #fef2f2;
-            color: #dc2626;
-            padding: 10px;
-            border-radius: 8px;
-            margin-top: 15px;
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(37, 99, 235, 0.5);
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #475569, #334155);
+            margin-top: 12px;
+        }
+
+        .btn-secondary:hover {
+            box-shadow: 0 10px 25px -5px rgba(71, 85, 105, 0.5);
+        }
+
+        .switch-link {
             text-align: center;
+            margin-top: 24px;
         }
+
+        .switch-link a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .switch-link a:hover {
+            color: #2563eb;
+        }
+
+        .error-message {
+            background: rgba(220, 38, 38, 0.2);
+            color: #fca5a5;
+            padding: 10px;
+            border-radius: 12px;
+            margin-top: 16px;
+            text-align: center;
+            font-size: 13px;
+            border: 1px solid rgba(220, 38, 38, 0.3);
+        }
+
+        .hidden { display: none; }
+
         .toast {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: white;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
             padding: 10px 18px;
-            border-radius: 8px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-            z-index: 1100;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
             transform: translateX(400px);
             transition: transform 0.3s;
             font-size: 13px;
+            font-weight: 500;
+            z-index: 1000;
+            color: #1f2937;
         }
         .toast.show { transform: translateX(0); }
-        .toast.success { border-left: 4px solid #16a34a; color: #16a34a; }
-        .toast.error { border-left: 4px solid #dc2626; color: #dc2626; }
+        .toast.success { border-left: 4px solid #16a34a; }
+        .toast.error { border-left: 4px solid #dc2626; }
+
+        @media (max-width: 640px) {
+            .login-card { padding: 32px 24px; margin: 0 16px; }
+            .login-title { font-size: 24px; }
+        }
     </style>
 </head>
 <body>
+    <!-- Partículas animadas -->
+    <div class="particles" id="particles"></div>
+    <div class="bg-shape bg-shape-1"></div>
+    <div class="bg-shape bg-shape-2"></div>
+
     <div class="container">
-        <div id="loginPanel" class="card">
-            <div class="header">
-                <h1><i class="fas fa-graduation-cap"></i> Curso  Residentes</h1>
-                <p>Inicia sesión para acceder al curso</p>
+        <div id="loginPanel" class="login-card">
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <img src="https://exam-netser.vercel.app/assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+                </div>
             </div>
+            <div class="login-title">Bienvenido</div>
+            <div class="login-subtitle">Inicia sesión para acceder al curso</div>
+            
             <form id="loginForm">
                 <div class="form-group">
                     <label>Correo Electrónico</label>
-                    <input type="email" id="loginEmail" required>
+                    <input type="email" id="loginEmail" placeholder="tu@email.com" required>
                 </div>
                 <div class="form-group">
                     <label>Contraseña</label>
-                    <input type="password" id="loginPassword" required>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
                 </div>
                 <button type="submit" class="btn">Iniciar Sesión</button>
                 <div class="switch-link">
@@ -104,44 +317,48 @@
             <div id="loginError" class="error-message hidden"></div>
         </div>
 
-        <div id="registerPanel" class="card hidden">
-            <div class="header">
-                <h1><i class="fas fa-user-plus"></i> Crear Cuenta</h1>
-                <p>Regístrate para acceder al curso</p>
+        <div id="registerPanel" class="login-card hidden">
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <img src="https://exam-netser.vercel.app/assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+                </div>
             </div>
+            <div class="login-title">Crear Cuenta</div>
+            <div class="login-subtitle">Regístrate para acceder al curso</div>
+            
             <form id="registerForm">
                 <div class="form-group">
                     <label>Nombre</label>
-                    <input type="text" id="regNombre" required>
+                    <input type="text" id="regNombre" placeholder="Tu nombre" required>
                 </div>
                 <div class="form-group">
                     <label>Apellido</label>
-                    <input type="text" id="regApellido" required>
+                    <input type="text" id="regApellido" placeholder="Tu apellido" required>
                 </div>
                 <div class="form-group">
                     <label>Correo Electrónico</label>
-                    <input type="email" id="regEmail" required>
+                    <input type="email" id="regEmail" placeholder="tu@email.com" required>
                 </div>
                 <div class="form-group">
                     <label>Contraseña</label>
-                    <input type="password" id="regPassword" required minlength="6">
+                    <input type="password" id="regPassword" placeholder="••••••••" required minlength="6">
                 </div>
                 <div class="form-group">
                     <label>Perfil</label>
-                    <select id="regProfile">
-                        <option value="client">Client</option>
-                        <option value="enterprise">Enterprise</option>
-                        <option value="both">Both</option>
+                    <select id="regProfile" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:16px;color:white;">
+                        <option value="client" style="background:#1e293b;">Client</option>
+                        <option value="enterprise" style="background:#1e293b;">Enterprise</option>
+                        <option value="both" style="background:#1e293b;">Both</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label>País</label>
-                    <select id="regCountry">
-                        <option value="colombia">Colombia</option>
-                        <option value="mexico">México</option>
-                        <option value="argentina">Argentina</option>
-                        <option value="chile">Chile</option>
-                        <option value="peru">Perú</option>
+                    <select id="regCountry" style="width:100%;padding:12px 16px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);border-radius:16px;color:white;">
+                        <option value="colombia" style="background:#1e293b;">Colombia</option>
+                        <option value="mexico" style="background:#1e293b;">México</option>
+                        <option value="argentina" style="background:#1e293b;">Argentina</option>
+                        <option value="chile" style="background:#1e293b;">Chile</option>
+                        <option value="peru" style="background:#1e293b;">Perú</option>
                     </select>
                 </div>
                 <button type="submit" class="btn">Registrarse</button>
@@ -154,15 +371,33 @@
     </div>
 
     <script>
+        // Partículas animadas
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                const size = Math.random() * 6 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                particle.style.animationDelay = `${Math.random() * 15}s`;
+                particle.style.animationDuration = `${15 + Math.random() * 10}s`;
+                container.appendChild(particle);
+            }
+        }
+        createParticles();
+
         const API_BASE_URL = '/api';
 
         function mostrarMensaje(mensaje, tipo) {
             const toast = document.createElement('div');
             toast.className = `toast ${tipo}`;
-            toast.innerHTML = `<i class="fas ${tipo === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i><span>${mensaje}</span>`;
+            toast.innerHTML = `<span>${mensaje}</span>`;
             document.body.appendChild(toast);
             setTimeout(() => toast.classList.add('show'), 10);
-            setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 300); }, 4000);
+            setTimeout(() => toast.remove(), 3000);
         }
 
         function showLogin() {
