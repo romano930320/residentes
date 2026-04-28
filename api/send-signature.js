@@ -6,6 +6,13 @@ export default async function handler(req, res) {
     try {
         const { empresa, nombreCompleto, email, fecha } = req.body;
         const adminEmail = 'robertomacedonorato@gmail.com';
+        
+        // Usar variable de entorno
+        const apiKey = process.env.BOLDSIGN_API_KEY;
+        
+        if (!apiKey) {
+            return res.status(500).json({ error: 'BOLDSIGN_API_KEY no configurada' });
+        }
 
         const pdfContent = `
 CERTIFICADO CURSO RESIDENTES NETSER
@@ -27,7 +34,7 @@ Firma Digital - ExamenNetser
         const response = await fetch('https://api.boldsign.com/v1/document/send', {
             method: 'POST',
             headers: {
-                'X-API-KEY': 'YTMxZjgxZDktMmJiZi00MTUzLThhZDAtZGU1NDZiZGExZjU3',
+                'X-API-KEY': apiKey,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
@@ -44,13 +51,14 @@ Firma Digital - ExamenNetser
 
         const data = await response.json();
 
-        if (!data.documentId && !data.requestId) {
-            throw new Error('Error en BoldSign');
+        if (!response.ok) {
+            console.error('Error BoldSign:', data);
+            throw new Error(data.message || 'Error en BoldSign');
         }
 
         res.json({ success: true, message: `Correo enviado a ${email}` });
     } catch (error) {
         console.error('Error:', error);
-        res.status(500).json({ error: 'Error al enviar correo' });
+        res.status(500).json({ error: error.message || 'Error al enviar correo' });
     }
 }
