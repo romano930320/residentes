@@ -35,10 +35,7 @@
             border-radius: 8px;
             transition: all 0.3s;
         }
-        .nav-links a.active { 
-            background: #2563eb; 
-            color: white; 
-        }
+        .nav-links a.active { background: #2563eb; color: white; }
         .user-info {
             display: flex;
             align-items: center;
@@ -58,38 +55,24 @@
             font-weight: bold;
             font-size: 12px;
         }
-        .user-name {
-            font-size: 13px;
-            font-weight: 500;
-            color: #333;
-        }
-        .logout-btn { 
-            background: none; 
-            border: none; 
-            color: #dc2626; 
+        .user-name { font-size: 13px; font-weight: 500; color: #333; }
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #dc2626;
             cursor: pointer;
             font-size: 13px;
             padding: 4px 8px;
             border-radius: 6px;
         }
-        .logout-btn:hover {
-            background: #fee2e2;
-        }
-        .container { 
-            max-width: 1300px; 
-            margin: 0 auto; 
-            padding: 20px; 
-        }
+        .logout-btn:hover { background: #fee2e2; }
+        .container { max-width: 1300px; margin: 0 auto; padding: 20px; }
         .main-layout {
             display: grid;
             grid-template-columns: 1fr 320px;
             gap: 20px;
         }
-        @media (max-width: 900px) { 
-            .main-layout { 
-                grid-template-columns: 1fr; 
-            } 
-        }
+        @media (max-width: 900px) { .main-layout { grid-template-columns: 1fr; } }
         .video-card, .signature-card {
             background: white;
             border-radius: 16px;
@@ -107,45 +90,31 @@
             align-items: center;
             gap: 8px;
         }
-        video { 
-            width: 100%; 
-            display: block;
-            background: #000;
-        }
-        
-        /* === BARRA DE PROGRESO AZUL TRANSPARENTE === */
+        video { width: 100%; display: block; background: #000; }
         .watch-status {
-            background: rgba(37, 99, 235, 0.15);
-            backdrop-filter: blur(4px);
             padding: 10px 12px;
             text-align: center;
             font-size: 13px;
             font-weight: 500;
             border-top: 1px solid rgba(37, 99, 235, 0.3);
+        }
+        .watch-status.pending {
+            background: rgba(37, 99, 235, 0.15);
             color: #1e3a8a;
         }
-        .watch-status.completed { 
+        .watch-status.completed {
             background: rgba(22, 163, 74, 0.2);
             color: #166534;
             border-top-color: rgba(22, 163, 74, 0.4);
         }
-        .watch-status.pending { 
-            background: rgba(37, 99, 235, 0.15);
-            color: #1e3a8a;
-        }
-        
-        .signature-body { 
-            padding: 16px; 
-        }
-        .form-group { 
-            margin-bottom: 14px; 
-        }
-        .form-group label { 
-            font-size: 12px; 
-            font-weight: 600; 
-            color: #555; 
-            display: block; 
-            margin-bottom: 4px; 
+        .signature-body { padding: 16px; }
+        .form-group { margin-bottom: 14px; }
+        .form-group label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #555;
+            display: block;
+            margin-bottom: 4px;
         }
         .form-group input {
             width: 100%;
@@ -155,10 +124,7 @@
             font-size: 13px;
             background: #f8fafc;
         }
-        .form-group input:disabled {
-            background: #f1f5f9;
-            color: #94a3b8;
-        }
+        .form-group input:disabled { background: #f1f5f9; color: #94a3b8; }
         .sign-btn {
             background: linear-gradient(135deg, #2563eb, #1e40af);
             color: white;
@@ -175,17 +141,8 @@
             transform: translateY(-1px);
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
         }
-        .sign-btn:disabled { 
-            background: #cbd5e1; 
-            cursor: not-allowed; 
-            transform: none;
-        }
-        .footer-note { 
-            font-size: 10px; 
-            text-align: center; 
-            color: #94a3b8; 
-            margin-top: 12px; 
-        }
+        .sign-btn:disabled { background: #cbd5e1; cursor: not-allowed; transform: none; }
+        .footer-note { font-size: 10px; text-align: center; color: #94a3b8; margin-top: 12px; }
         .toast {
             position: fixed;
             bottom: 30px;
@@ -298,7 +255,9 @@
         const btnFirmar = document.getElementById('btnFirmar');
         const inputEmpresa = document.getElementById('empresaResidente');
 
+        // FIX: esperar a que el video cargue sus metadatos antes de calcular duración
         video.addEventListener('timeupdate', () => {
+            if (!video.duration || isNaN(video.duration)) return;
             const porcentaje = (video.currentTime / video.duration) * 100;
             if (porcentaje >= 95 && !videoCompletado) {
                 videoCompletado = true;
@@ -313,14 +272,14 @@
 
         async function firmarConBoldSign() {
             const empresa = document.getElementById('empresaResidente').value.trim();
-            if (!empresa) { 
-                mostrarMensaje('Ingresa el nombre de tu empresa', 'error'); 
-                return; 
+            if (!empresa) {
+                mostrarMensaje('Ingresa el nombre de tu empresa', 'error');
+                return;
             }
-            
+
             btnFirmar.disabled = true;
             btnFirmar.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Enviando...';
-            
+
             try {
                 const response = await fetch('/api/send-signature', {
                     method: 'POST',
@@ -332,18 +291,21 @@
                         fecha: document.getElementById('fechaVisualizacion').value
                     })
                 });
-                
+
                 const data = await response.json();
                 if (!response.ok) throw new Error(data.error || data.details?.message || 'Error al enviar');
-                
+
                 mostrarMensaje(`✅ Correo enviado a ${usuarioActual.email}. Revisa tu bandeja.`, 'success');
                 inputEmpresa.value = '';
+                // FIX: restaurar botón después del éxito
                 btnFirmar.disabled = true;
+                btnFirmar.innerHTML = '<i class="fas fa-pen-fancy"></i> Firmar con BoldSign';
                 videoCompletado = false;
                 video.currentTime = 0;
                 video.load();
                 estadoDiv.className = 'watch-status pending';
-                
+                estadoDiv.innerHTML = '📺 Progreso: 0% - Debes ver el video completo para firmar';
+
             } catch (error) {
                 mostrarMensaje(error.message, 'error');
                 btnFirmar.disabled = false;
