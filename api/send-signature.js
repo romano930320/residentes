@@ -56,7 +56,7 @@ export default async function handler(req, res) {
                     ]
                 }
             ],
-            CC: [{ EmailAddress: adminEmail }],
+            CC: [],
             Files: [{ Name: 'certificado.pdf', Base64: pdfBase64 }]
         };
 
