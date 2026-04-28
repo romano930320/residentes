@@ -71,7 +71,13 @@ export default async function handler(req, res) {
             body: JSON.stringify(requestBody)
         });
 
-        const data = await response.json();
+        const text = await response.text();
+let data;
+try {
+    data = JSON.parse(text);
+} catch {
+    return res.status(response.status).json({ error: 'BoldSign respondió: ' + text });
+}
         console.log('Respuesta BoldSign:', JSON.stringify(data, null, 2));
 
         if (!response.ok) {
