@@ -11,10 +11,8 @@ export default async function handler(req, res) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Método no permitido' });
     }
-
     try {
         const { email, password } = req.body;
-
         if (!email || !password) {
             return res.status(400).json({ error: 'Faltan credenciales' });
         }
@@ -36,10 +34,10 @@ export default async function handler(req, res) {
         }
 
         const token = jwt.sign(
-            { 
-                id: user.id, 
-                email: user.email, 
-                first_name: user.first_name, 
+            {
+                id: user.id,
+                email: user.email,
+                first_name: user.first_name,
                 last_name: user.last_name,
                 profile: user.profile
             },
