@@ -3,175 +3,389 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso Residentes | ExamenNetser</title>
+    <title>Curso Residentes | Netser Group</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Roboto', sans-serif; }
+        :root {
+            --blue: #2563eb;
+            --blue-mid: #1d4ed8;
+            --blue-dark: #1e3a8a;
+            --accent: #38bdf8;
+            --bg: #060d1f;
+            --surface: #0d1730;
+            --card: #111d36;
+            --card2: #0f1a30;
+            --border: rgba(37,99,235,0.18);
+            --border2: rgba(56,189,248,0.12);
+            --text: #e2e8f0;
+            --muted: #64748b;
+            --green: #22c55e;
+            --green-dim: rgba(34,197,94,0.12);
+            --red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 50%, #64748b 100%);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             min-height: 100vh;
+            overflow-x: hidden;
         }
+
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+            background-size: 40px 40px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            top: -20%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 900px;
+            height: 500px;
+            background: radial-gradient(ellipse, rgba(37,99,235,0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ── NAVBAR ── */
         .navbar {
-            background: white;
-            padding: 0.6rem 1.5rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(6,13,31,0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border);
+            padding: 0 2rem;
+            height: 62px;
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .logo { height: 40px; }
-        .nav-links {
+
+        .logo { height: 36px; filter: brightness(1.1); }
+
+        .nav-right {
             display: flex;
             align-items: center;
-            gap: 15px;
+            gap: 12px;
         }
-        .nav-links a {
-            text-decoration: none;
-            color: #666;
-            padding: 6px 14px;
-            font-weight: 500;
-            font-size: 14px;
-            border-radius: 8px;
-            transition: all 0.3s;
+
+        .nav-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: rgba(37,99,235,0.15);
+            border: 1px solid var(--border);
+            padding: 5px 12px 5px 10px;
+            border-radius: 100px;
+            font-size: 12px;
+            color: var(--accent);
+            font-weight: 600;
         }
-        .nav-links a.active { background: #2563eb; color: white; }
-        .user-info {
+
+        .user-pill {
             display: flex;
             align-items: center;
             gap: 8px;
-            background: #f0f0f0;
-            padding: 4px 12px;
-            border-radius: 30px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 4px 12px 4px 6px;
+            border-radius: 100px;
         }
+
         .user-avatar {
             width: 28px; height: 28px;
-            background: #2563eb;
+            background: linear-gradient(135deg, var(--blue), var(--accent));
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-weight: bold;
-            font-size: 12px;
+            font-weight: 700;
+            font-size: 11px;
+            font-family: 'Outfit', sans-serif;
         }
-        .user-name { font-size: 13px; font-weight: 500; color: #333; }
+
+        #userName { font-size: 13px; font-weight: 600; color: var(--text); }
+
         .logout-btn {
-            background: none;
-            border: none;
-            color: #dc2626;
-            cursor: pointer;
-            font-size: 13px;
-            padding: 4px 8px;
-            border-radius: 6px;
+            background: none; border: none;
+            color: var(--muted); cursor: pointer;
+            padding: 4px 6px; border-radius: 6px;
+            font-size: 12px; transition: color 0.15s;
         }
-        .logout-btn:hover { background: #fee2e2; }
-        .container { max-width: 1300px; margin: 0 auto; padding: 20px; }
+        .logout-btn:hover { color: var(--red); }
+
+        /* ── HERO ── */
+        .hero {
+            position: relative; z-index: 1;
+            padding: 32px 2rem 0;
+            max-width: 1300px; margin: 0 auto;
+        }
+
+        .hero-label {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: rgba(56,189,248,0.08);
+            border: 1px solid var(--border2);
+            color: var(--accent);
+            padding: 4px 12px; border-radius: 100px;
+            font-size: 11px; font-weight: 600;
+            letter-spacing: 0.08em; text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .hero h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+            font-weight: 700; color: #fff; line-height: 1.2;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(90deg, var(--blue) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* ── LAYOUT ── */
+        .container {
+            max-width: 1300px; margin: 0 auto;
+            padding: 20px 2rem 3rem;
+            position: relative; z-index: 1;
+        }
+
         .main-layout {
             display: grid;
-            grid-template-columns: 1fr 320px;
-            gap: 20px;
+            grid-template-columns: 1fr 330px;
+            gap: 20px; margin-top: 20px;
         }
-        @media (max-width: 900px) { .main-layout { grid-template-columns: 1fr; } }
-        .video-card, .signature-card {
-            background: white;
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+
+        @media (max-width: 960px) { .main-layout { grid-template-columns: 1fr; } }
+
+        /* ── CARDS ── */
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px; overflow: hidden;
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.3);
+            animation: fadeUp 0.5s ease both;
         }
-        .video-header, .signature-header {
-            background: white;
-            color: #2563eb;
-            padding: 12px 16px;
-            font-weight: 600;
-            font-size: 15px;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+        .card:nth-child(2) { animation-delay: 0.08s; }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
+
+        .card-header {
+            padding: 14px 18px;
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            background: var(--card2);
+        }
+
+        .card-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 14px; font-weight: 600; color: #fff;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .card-title i { color: var(--accent); font-size: 13px; }
+
+        .card-dot {
+            width: 8px; height: 8px; border-radius: 50%;
+            background: var(--muted);
+            transition: all 0.3s;
+        }
+        .card-dot.live {
+            background: var(--green);
+            box-shadow: 0 0 8px var(--green);
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        /* ── VIDEO ── */
         video { width: 100%; display: block; background: #000; }
-        .watch-status {
-            padding: 10px 12px;
-            text-align: center;
-            font-size: 13px;
-            font-weight: 500;
-            border-top: 1px solid rgba(37, 99, 235, 0.3);
+
+        .progress-wrap {
+            padding: 14px 18px;
+            background: var(--card2);
+            border-top: 1px solid var(--border);
         }
-        .watch-status.pending {
-            background: rgba(37, 99, 235, 0.15);
-            color: #1e3a8a;
+
+        .progress-top {
+            display: flex; justify-content: space-between;
+            align-items: center; margin-bottom: 8px;
         }
-        .watch-status.completed {
-            background: rgba(22, 163, 74, 0.2);
-            color: #166534;
-            border-top-color: rgba(22, 163, 74, 0.4);
+
+        .progress-label { font-size: 12px; font-weight: 500; color: var(--muted); }
+        .progress-pct {
+            font-family: 'Outfit', sans-serif;
+            font-size: 13px; font-weight: 700; color: var(--accent);
         }
-        .signature-body { padding: 16px; }
+
+        .progress-track {
+            height: 4px; background: rgba(255,255,255,0.06);
+            border-radius: 100px; overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--blue), var(--accent));
+            border-radius: 100px; transition: width 0.4s ease;
+            box-shadow: 0 0 8px rgba(56,189,248,0.4);
+        }
+
+        .status-bar {
+            padding: 10px 18px; font-size: 12px; font-weight: 600;
+            display: flex; align-items: center; gap: 8px;
+            border-top: 1px solid var(--border); letter-spacing: 0.01em;
+        }
+        .status-bar.pending { background: rgba(37,99,235,0.08); color: #93c5fd; }
+        .status-bar.completed {
+            background: var(--green-dim); color: var(--green);
+            border-top-color: rgba(34,197,94,0.2);
+        }
+
+        /* ── SIGNATURE ── */
+        .sig-body { padding: 18px; }
+
+        .steps { display: flex; flex-direction: column; margin-bottom: 20px; }
+
+        .step {
+            display: flex; align-items: flex-start; gap: 12px;
+            padding: 10px 0; position: relative;
+        }
+        .step:not(:last-child)::after {
+            content: ''; position: absolute;
+            left: 11px; top: 32px;
+            width: 1px; height: calc(100% - 12px);
+            background: var(--border);
+        }
+
+        .step-icon {
+            width: 24px; height: 24px; border-radius: 50%;
+            border: 1.5px solid var(--border);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 9px; font-weight: 700; color: var(--muted);
+            flex-shrink: 0; background: var(--card2);
+            transition: all 0.3s; position: relative; z-index: 1;
+        }
+        .step.done .step-icon {
+            background: var(--green-dim);
+            border-color: rgba(34,197,94,0.4); color: var(--green);
+        }
+        .step.active .step-icon {
+            background: rgba(37,99,235,0.2);
+            border-color: var(--blue); color: var(--accent);
+            box-shadow: 0 0 12px rgba(37,99,235,0.3);
+        }
+
+        .step-text { font-size: 12px; color: var(--muted); padding-top: 4px; line-height: 1.3; }
+        .step.done .step-text { color: var(--green); }
+        .step.active .step-text { color: var(--text); font-weight: 500; }
+        .step-text small { display: block; font-size: 10px; opacity: 0.6; margin-top: 1px; }
+
+        .divider { height: 1px; background: var(--border); margin: 16px 0; }
+
         .form-group { margin-bottom: 14px; }
         .form-group label {
-            font-size: 12px;
-            font-weight: 600;
-            color: #555;
-            display: block;
-            margin-bottom: 4px;
+            display: block; font-size: 10px; font-weight: 700;
+            color: var(--muted); letter-spacing: 0.08em;
+            text-transform: uppercase; margin-bottom: 6px;
         }
         .form-group input {
-            width: 100%;
-            padding: 8px 10px;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            font-size: 13px;
-            background: #f8fafc;
+            width: 100%; padding: 9px 12px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid var(--border); border-radius: 10px;
+            font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif;
+            color: var(--text); outline: none;
+            transition: border-color 0.15s, box-shadow 0.15s;
         }
-        .form-group input:disabled { background: #f1f5f9; color: #94a3b8; }
+        .form-group input:focus {
+            border-color: var(--blue);
+            box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
+            background: rgba(37,99,235,0.06);
+        }
+        .form-group input:disabled { opacity: 0.4; cursor: not-allowed; }
+        .form-group input::placeholder { color: var(--muted); opacity: 0.5; }
+
         .sign-btn {
-            background: linear-gradient(135deg, #2563eb, #1e40af);
-            color: white;
-            border: none;
-            padding: 10px;
-            border-radius: 8px;
-            width: 100%;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 14px;
+            width: 100%; padding: 11px;
+            background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+            color: white; border: none; border-radius: 12px;
+            font-size: 13px; font-weight: 700;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            cursor: pointer; display: flex; align-items: center;
+            justify-content: center; gap: 8px;
             transition: all 0.2s;
+            box-shadow: 0 4px 16px rgba(37,99,235,0.35);
+            position: relative; overflow: hidden;
         }
+        .sign-btn::before {
+            content: ''; position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            transition: left 0.4s;
+        }
+        .sign-btn:hover:not(:disabled)::before { left: 100%; }
         .sign-btn:hover:not(:disabled) {
             transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+            box-shadow: 0 8px 24px rgba(37,99,235,0.45);
         }
-        .sign-btn:disabled { background: #cbd5e1; cursor: not-allowed; transform: none; }
-        .footer-note { font-size: 10px; text-align: center; color: #94a3b8; margin-top: 12px; }
+        .sign-btn:disabled {
+            background: rgba(255,255,255,0.06);
+            color: var(--muted); cursor: not-allowed; box-shadow: none;
+        }
+
+        .footer-note {
+            text-align: center; font-size: 11px; color: var(--muted);
+            margin-top: 12px; display: flex; align-items: center;
+            justify-content: center; gap: 5px; opacity: 0.7;
+        }
+
+        /* ── TOAST ── */
         .toast {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: white;
-            padding: 10px 18px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            transform: translateX(400px);
-            transition: transform 0.3s;
-            font-size: 13px;
-            font-weight: 500;
-            z-index: 1000;
+            position: fixed; bottom: 24px; right: 24px;
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: 12px; padding: 12px 18px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+            transform: translateY(80px); opacity: 0;
+            transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            font-size: 13px; font-weight: 600;
+            display: flex; align-items: center; gap: 10px;
+            z-index: 999; max-width: 320px; color: var(--text);
         }
-        .toast.show { transform: translateX(0); }
-        .toast.success { border-left: 4px solid #16a34a; color: #16a34a; }
-        .toast.error { border-left: 4px solid #dc2626; color: #dc2626; }
+        .toast.show { transform: translateY(0); opacity: 1; }
+        .toast.success { border-left: 3px solid var(--green); }
+        .toast.error { border-left: 3px solid var(--red); }
     </style>
 </head>
 <body>
+
     <nav class="navbar">
-        <div class="logo-container">
-            <img src="https://exam-netser.vercel.app/assets/logo.png" alt="Logo" class="logo" onerror="this.style.display='none'">
-        </div>
-        <div class="nav-links">
-            <a href="curso-residentes.html" class="active">🎥 Curso Residentes</a>
-            <div class="user-info" id="userInfo">
-                <div class="user-avatar" id="userAvatar">E</div>
-                <span class="user-name" id="userName">Cargando...</span>
+        <img src="https://exam-netser.vercel.app/assets/logo.png" alt="Netser" class="logo" onerror="this.style.display='none'">
+        <div class="nav-right">
+            <div class="nav-badge">
+                <i class="fas fa-graduation-cap"></i> Curso Residentes
+            </div>
+            <div class="user-pill">
+                <div class="user-avatar" id="userAvatar">N</div>
+                <span id="userName">Cargando...</span>
                 <button class="logout-btn" onclick="cerrarSesion()" title="Cerrar sesión">
                     <i class="fas fa-sign-out-alt"></i>
                 </button>
@@ -179,45 +393,81 @@
         </div>
     </nav>
 
+    <div class="hero">
+        <div class="hero-label"><i class="fas fa-circle" style="font-size:6px"></i> Capacitación Activa</div>
+        <h1>Residentes Netser — <span>Certificación Digital</span></h1>
+    </div>
+
     <div class="container">
         <div class="main-layout">
-            <div class="video-card">
-                <div class="video-header">
-                    <i class="fas fa-play-circle"></i> Residentes Netser
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-play-circle"></i> Residentes Netser</div>
+                    <div class="card-dot" id="cardDot"></div>
                 </div>
                 <video id="videoPlayer" controls>
                     <source src="https://1pu2mkw0da1vc7lq.public.blob.vercel-storage.com/videos/Residentes%20v2%20-%20Hecho%20con%20Microsoft%20Clipchamp_1777335302990.mp4" type="video/mp4">
                 </video>
-                <div class="watch-status pending" id="estadoVisualizacion">
-                    📺 Progreso: 0% - Debes ver el video completo para firmar
+                <div class="progress-wrap">
+                    <div class="progress-top">
+                        <span class="progress-label">Progreso de visualización</span>
+                        <span class="progress-pct" id="porcentajeLabel">0%</span>
+                    </div>
+                    <div class="progress-track">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                </div>
+                <div class="status-bar pending" id="estadoVisualizacion">
+                    <i class="fas fa-clock"></i> Debes ver el video completo para poder firmar
                 </div>
             </div>
 
-            <div class="signature-card">
-                <div class="signature-header">
-                    <i class="fas fa-signature"></i> Firma Digital
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><i class="fas fa-file-signature"></i> Firma Digital</div>
                 </div>
-                <div class="signature-body">
+                <div class="sig-body">
+                    <div class="steps">
+                        <div class="step done" id="step1">
+                            <div class="step-icon"><i class="fas fa-check" style="font-size:8px"></i></div>
+                            <div class="step-text">Sesión iniciada<small>Autenticado correctamente</small></div>
+                        </div>
+                        <div class="step" id="step2">
+                            <div class="step-icon">2</div>
+                            <div class="step-text">Ver video completo<small>Mínimo 95% del contenido</small></div>
+                        </div>
+                        <div class="step" id="step3">
+                            <div class="step-icon">3</div>
+                            <div class="step-text">Firmar certificado<small>Vía correo electrónico</small></div>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
                     <div class="form-group">
                         <label>Nombre Completo</label>
                         <input type="text" id="nombreCompleto" disabled>
                     </div>
                     <div class="form-group">
                         <label>Empresa / Institución</label>
-                        <input type="text" id="empresaResidente" placeholder="Nombre de la empresa" disabled>
+                        <input type="text" id="empresaResidente" placeholder="Nombre de tu empresa" disabled>
                     </div>
                     <div class="form-group">
                         <label>Fecha</label>
                         <input type="text" id="fechaVisualizacion" disabled>
                     </div>
+
                     <button class="sign-btn" id="btnFirmar" disabled>
                         <i class="fas fa-pen-fancy"></i> Firmar con BoldSign
                     </button>
+
                     <div class="footer-note">
                         <i class="fas fa-lock"></i> Recibirás un correo para firmar digitalmente
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -228,10 +478,12 @@
         function mostrarMensaje(mensaje, tipo) {
             const toast = document.createElement('div');
             toast.className = `toast ${tipo}`;
-            toast.innerHTML = `<span>${mensaje}</span>`;
+            const icon = tipo === 'success' ? 'check-circle' : 'exclamation-circle';
+            const color = tipo === 'success' ? 'var(--green)' : 'var(--red)';
+            toast.innerHTML = `<i class="fas fa-${icon}" style="color:${color};font-size:15px"></i><span>${mensaje}</span>`;
             document.body.appendChild(toast);
             setTimeout(() => toast.classList.add('show'), 10);
-            setTimeout(() => toast.remove(), 3000);
+            setTimeout(() => { toast.classList.remove('show'); setTimeout(() => toast.remove(), 400); }, 4000);
         }
 
         const user = localStorage.getItem('user');
@@ -254,28 +506,35 @@
         const estadoDiv = document.getElementById('estadoVisualizacion');
         const btnFirmar = document.getElementById('btnFirmar');
         const inputEmpresa = document.getElementById('empresaResidente');
+        const progressFill = document.getElementById('progressFill');
+        const porcentajeLabel = document.getElementById('porcentajeLabel');
+        const cardDot = document.getElementById('cardDot');
 
-        // FIX: esperar a que el video cargue sus metadatos antes de calcular duración
+        video.addEventListener('play', () => cardDot.classList.add('live'));
+        video.addEventListener('pause', () => cardDot.classList.remove('live'));
+        video.addEventListener('ended', () => cardDot.classList.remove('live'));
+
         video.addEventListener('timeupdate', () => {
             if (!video.duration || isNaN(video.duration)) return;
             const porcentaje = (video.currentTime / video.duration) * 100;
+            progressFill.style.width = Math.min(porcentaje, 100) + '%';
+            porcentajeLabel.textContent = Math.round(porcentaje) + '%';
+
             if (porcentaje >= 95 && !videoCompletado) {
                 videoCompletado = true;
-                estadoDiv.className = 'watch-status completed';
-                estadoDiv.innerHTML = '✅ Video completado - Ya puedes firmar';
+                estadoDiv.className = 'status-bar completed';
+                estadoDiv.innerHTML = '<i class="fas fa-check-circle"></i> Video completado — ya puedes firmar tu certificado';
                 inputEmpresa.disabled = false;
                 btnFirmar.disabled = false;
-            } else if (!videoCompletado) {
-                estadoDiv.innerHTML = `📺 Progreso: ${Math.round(porcentaje)}% - Debes ver el video completo`;
+                document.getElementById('step2').className = 'step done';
+                document.getElementById('step2').querySelector('.step-icon').innerHTML = '<i class="fas fa-check" style="font-size:8px"></i>';
+                document.getElementById('step3').className = 'step active';
             }
         });
 
         async function firmarConBoldSign() {
             const empresa = document.getElementById('empresaResidente').value.trim();
-            if (!empresa) {
-                mostrarMensaje('Ingresa el nombre de tu empresa', 'error');
-                return;
-            }
+            if (!empresa) { mostrarMensaje('Ingresa el nombre de tu empresa', 'error'); return; }
 
             btnFirmar.disabled = true;
             btnFirmar.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> Enviando...';
@@ -285,7 +544,7 @@
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({
-                        empresa: empresa,
+                        empresa,
                         nombreCompleto: `${usuarioActual.first_name} ${usuarioActual.last_name}`,
                         email: usuarioActual.email,
                         fecha: document.getElementById('fechaVisualizacion').value
@@ -295,16 +554,20 @@
                 const data = await response.json();
                 if (!response.ok) throw new Error(data.error || data.details?.message || 'Error al enviar');
 
-                mostrarMensaje(`✅ Correo enviado a ${usuarioActual.email}. Revisa tu bandeja.`, 'success');
+                mostrarMensaje(`Correo enviado a ${usuarioActual.email}`, 'success');
+                document.getElementById('step3').className = 'step done';
+                document.getElementById('step3').querySelector('.step-icon').innerHTML = '<i class="fas fa-check" style="font-size:8px"></i>';
                 inputEmpresa.value = '';
-                // FIX: restaurar botón después del éxito
                 btnFirmar.disabled = true;
                 btnFirmar.innerHTML = '<i class="fas fa-pen-fancy"></i> Firmar con BoldSign';
                 videoCompletado = false;
                 video.currentTime = 0;
                 video.load();
-                estadoDiv.className = 'watch-status pending';
-                estadoDiv.innerHTML = '📺 Progreso: 0% - Debes ver el video completo para firmar';
+                cardDot.classList.remove('live');
+                estadoDiv.className = 'status-bar pending';
+                estadoDiv.innerHTML = '<i class="fas fa-clock"></i> Debes ver el video completo para poder firmar';
+                progressFill.style.width = '0%';
+                porcentajeLabel.textContent = '0%';
 
             } catch (error) {
                 mostrarMensaje(error.message, 'error');
