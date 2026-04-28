@@ -21,7 +21,6 @@
             position: relative;
         }
 
-        /* Partículas animadas de fondo */
         .particles {
             position: fixed;
             top: 0;
@@ -58,7 +57,6 @@
             }
         }
 
-        /* Círculos de fondo */
         .bg-shape {
             position: fixed;
             border-radius: 50%;
@@ -116,7 +114,6 @@
             border-color: rgba(51, 153, 225, 0.8);
         }
 
-        /* Logo centrado */
         .logo-wrapper {
             text-align: center;
             margin-bottom: 24px;
@@ -276,7 +273,6 @@
     </style>
 </head>
 <body>
-    <!-- Partículas animadas -->
     <div class="particles" id="particles"></div>
     <div class="bg-shape bg-shape-1"></div>
     <div class="bg-shape bg-shape-2"></div>
@@ -285,7 +281,7 @@
         <div id="loginPanel" class="login-card">
             <div class="logo-wrapper">
                 <div class="logo-circle">
-                    <img src="https://exam-netser.vercel.app/assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+                    <img src="/assets/logo%20blanco%20con%20groupvf.png" alt="Logo" onerror="this.style.display='none'">
                 </div>
             </div>
             <div class="login-title">Bienvenido</div>
@@ -311,7 +307,7 @@
         <div id="registerPanel" class="login-card hidden">
             <div class="logo-wrapper">
                 <div class="logo-circle">
-                    <img src="https://exam-netser.vercel.app/assets/logo.png" alt="Logo" onerror="this.style.display='none'">
+                    <img src="/assets/logo%20blanco%20con%20groupvf.png" alt="Logo" onerror="this.style.display='none'">
                 </div>
             </div>
             <div class="login-title">Crear Cuenta</div>
@@ -362,7 +358,6 @@
     </div>
 
     <script>
-        // Partículas animadas
         function createParticles() {
             const container = document.getElementById('particles');
             for (let i = 0; i < 50; i++) {
