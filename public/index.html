@@ -3,17 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Curso Residentes | ExamenNetser</title>
+    <title>Curso Residentes | Video Certificacion</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
         body {
             min-height: 100vh;
             background: linear-gradient(135deg, #00309D 0%, #00309D 40%, #3399E1 100%);
             overflow-x: hidden;
             position: relative;
         }
+
         .particles {
             position: fixed;
             top: 0;
@@ -23,18 +30,33 @@
             overflow: hidden;
             z-index: 0;
         }
+
         .particle {
             position: absolute;
             background: rgba(51, 153, 225, 0.3);
             border-radius: 50%;
             animation: float 15s infinite ease-in-out;
         }
+
         @keyframes float {
-            0%, 100% { transform: translateY(0) translateX(0); opacity: 0.2; }
-            25% { transform: translateY(-30px) translateX(20px); opacity: 0.5; }
-            50% { transform: translateY(30px) translateX(-20px); opacity: 0.3; }
-            75% { transform: translateY(-15px) translateX(-10px); opacity: 0.6; }
+            0%, 100% {
+                transform: translateY(0) translateX(0);
+                opacity: 0.2;
+            }
+            25% {
+                transform: translateY(-30px) translateX(20px);
+                opacity: 0.5;
+            }
+            50% {
+                transform: translateY(30px) translateX(-20px);
+                opacity: 0.3;
+            }
+            75% {
+                transform: translateY(-15px) translateX(-10px);
+                opacity: 0.6;
+            }
         }
+
         .bg-shape {
             position: fixed;
             border-radius: 50%;
@@ -42,10 +64,38 @@
             pointer-events: none;
             z-index: 0;
         }
-        .bg-shape-1 { width: 500px; height: 500px; top: -200px; right: -150px; animation: pulse 8s infinite; }
-        .bg-shape-2 { width: 400px; height: 400px; bottom: -150px; left: -150px; animation: pulse 10s infinite reverse; }
-        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.3; } 50% { transform: scale(1.1); opacity: 0.5; } }
-        .container { min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 20px; position: relative; z-index: 10; }
+
+        .bg-shape-1 {
+            width: 500px;
+            height: 500px;
+            top: -200px;
+            right: -150px;
+            animation: pulse 8s infinite;
+        }
+
+        .bg-shape-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
+            left: -150px;
+            animation: pulse 10s infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.1); opacity: 0.5; }
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            z-index: 10;
+        }
+
         .login-card {
             background: rgba(170, 173, 175, 0.1);
             backdrop-filter: blur(12px);
@@ -57,36 +107,95 @@
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             transition: transform 0.3s, box-shadow 0.3s;
         }
-        .login-card:hover { transform: translateY(-5px); box-shadow: 0 35px 60px -15px rgba(0,0,0,0.6); border-color: rgba(51,153,225,0.8); }
-        .logo-wrapper { text-align: center; margin-bottom: 24px; }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 35px 60px -15px rgba(0, 0, 0, 0.6);
+            border-color: rgba(51, 153, 225, 0.8);
+        }
+
+        .logo-wrapper {
+            text-align: center;
+            margin-bottom: 24px;
+        }
+
         .logo-circle {
-            width: 90px; height: 90px;
+            width: 90px;
+            height: 90px;
             background: linear-gradient(135deg, #00309D, #3399E1);
             border-radius: 50%;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 25px -5px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
             animation: glow 2s infinite alternate;
         }
-        @keyframes glow { from { box-shadow: 0 0 10px rgba(51,153,225,0.5); } to { box-shadow: 0 0 25px rgba(51,153,225,0.8); } }
-        .logo-circle i { font-size: 45px; color: white; }
-        .login-title { text-align: center; color: white; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
-        .login-subtitle { text-align: center; color: rgba(255,255,255,0.8); font-size: 14px; margin-bottom: 32px; }
-        .form-group { margin-bottom: 20px; }
-        .form-group label { display: block; color: rgba(255,255,255,0.9); font-size: 13px; font-weight: 500; margin-bottom: 8px; }
+
+        @keyframes glow {
+            from { box-shadow: 0 0 10px rgba(51, 153, 225, 0.5); }
+            to { box-shadow: 0 0 25px rgba(51, 153, 225, 0.8); }
+        }
+
+        .logo-circle i {
+            font-size: 45px;
+            color: white;
+        }
+
+        .login-title {
+            text-align: center;
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .login-subtitle {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+
         .form-group input, .form-group select {
             width: 100%;
             padding: 12px 16px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(51,153,225,0.3);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(51, 153, 225, 0.3);
             border-radius: 16px;
             font-size: 15px;
             color: white;
+            transition: all 0.3s;
         }
-        .form-group input:focus { outline: none; border-color: #3399E1; background: rgba(51,153,225,0.15); }
-        .form-group input::placeholder { color: rgba(255,255,255,0.4); }
-        .form-group select option { background: #00309D; color: white; }
+
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #3399E1;
+            background: rgba(51, 153, 225, 0.15);
+            box-shadow: 0 0 0 3px rgba(51, 153, 225, 0.2);
+        }
+
+        .form-group input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        .form-group select option {
+            background: #00309D;
+            color: white;
+        }
+
         .btn {
             width: 100%;
             padding: 12px;
@@ -97,30 +206,54 @@
             font-weight: 600;
             color: white;
             cursor: pointer;
+            transition: all 0.3s;
             margin-top: 8px;
         }
-        .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(0,48,157,0.5); }
-        .switch-link { text-align: center; margin-top: 24px; }
-        .switch-link a { color: rgba(255,255,255,0.8); text-decoration: none; font-size: 14px; cursor: pointer; }
-        .switch-link a:hover { color: #3399E1; }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(0, 48, 157, 0.5);
+        }
+
+        .switch-link {
+            text-align: center;
+            margin-top: 24px;
+        }
+
+        .switch-link a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 14px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .switch-link a:hover {
+            color: #3399E1;
+        }
+
         .error-message {
-            background: rgba(220,38,38,0.2);
+            background: rgba(220, 38, 38, 0.2);
             color: #fca5a5;
             padding: 10px;
             border-radius: 12px;
             margin-top: 16px;
             text-align: center;
             font-size: 13px;
+            border: 1px solid rgba(220, 38, 38, 0.3);
         }
+
         .hidden { display: none; }
+
         .toast {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background: rgba(255,255,255,0.95);
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(8px);
             padding: 10px 18px;
             border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
             transform: translateX(400px);
             transition: transform 0.3s;
             font-size: 13px;
@@ -131,7 +264,11 @@
         .toast.show { transform: translateX(0); }
         .toast.success { border-left: 4px solid #16a34a; }
         .toast.error { border-left: 4px solid #dc2626; }
-        @media (max-width: 640px) { .login-card { padding: 32px 24px; } .login-title { font-size: 24px; } }
+
+        @media (max-width: 640px) {
+            .login-card { padding: 32px 24px; margin: 0 16px; }
+            .login-title { font-size: 24px; }
+        }
     </style>
 </head>
 <body>
@@ -141,37 +278,79 @@
 
     <div class="container">
         <div id="loginPanel" class="login-card">
-            <div class="logo-wrapper"><div class="logo-circle"><i class="fas fa-user-graduate"></i></div></div>
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <i class="fas fa-user-graduate"></i>
+                </div>
+            </div>
             <div class="login-title">Bienvenido</div>
             <div class="login-subtitle">Inicia sesión para acceder al curso</div>
+            
             <form id="loginForm">
-                <div class="form-group"><label>Correo Electrónico</label><input type="email" id="loginEmail" placeholder="tu@email.com" required></div>
-                <div class="form-group"><label>Contraseña</label><input type="password" id="loginPassword" placeholder="••••••••" required></div>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="loginEmail" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
                 <button type="submit" class="btn">Iniciar Sesión</button>
-                <div class="switch-link"><a onclick="showRegister()">¿No tienes cuenta? Regístrate</a></div>
+                <div class="switch-link">
+                    <a onclick="showRegister()">¿No tienes cuenta? Regístrate</a>
+                </div>
             </form>
             <div id="loginError" class="error-message hidden"></div>
         </div>
 
         <div id="registerPanel" class="login-card hidden">
-            <div class="logo-wrapper"><div class="logo-circle"><i class="fas fa-user-plus"></i></div></div>
+            <div class="logo-wrapper">
+                <div class="logo-circle">
+                    <i class="fas fa-user-plus"></i>
+                </div>
+            </div>
             <div class="login-title">Crear Cuenta</div>
             <div class="login-subtitle">Regístrate para acceder al curso</div>
+            
             <form id="registerForm">
-                <div class="form-group"><label>Nombre</label><input type="text" id="regNombre" placeholder="Tu nombre" required></div>
-                <div class="form-group"><label>Apellido</label><input type="text" id="regApellido" placeholder="Tu apellido" required></div>
-                <div class="form-group"><label>Correo Electrónico</label><input type="email" id="regEmail" placeholder="tu@email.com" required></div>
-                <div class="form-group"><label>Contraseña</label><input type="password" id="regPassword" placeholder="••••••••" required minlength="6"></div>
+                <div class="form-group">
+                    <label>Nombre</label>
+                    <input type="text" id="regNombre" placeholder="Tu nombre" required>
+                </div>
+                <div class="form-group">
+                    <label>Apellido</label>
+                    <input type="text" id="regApellido" placeholder="Tu apellido" required>
+                </div>
+                <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input type="email" id="regEmail" placeholder="tu@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Contraseña</label>
+                    <input type="password" id="regPassword" placeholder="••••••••" required minlength="6">
+                </div>
                 <div class="form-group">
                     <label>Perfil</label>
-                    <select id="regProfile"><option value="client">Client</option><option value="enterprise">Enterprise</option><option value="both">Both</option></select>
+                    <select id="regProfile">
+                        <option value="client">Client</option>
+                        <option value="enterprise">Enterprise</option>
+                        <option value="both">Both</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label>País</label>
-                    <select id="regCountry"><option value="colombia">Colombia</option><option value="mexico">México</option><option value="argentina">Argentina</option><option value="chile">Chile</option><option value="peru">Perú</option></select>
+                    <select id="regCountry">
+                        <option value="colombia">Colombia</option>
+                        <option value="mexico">México</option>
+                        <option value="argentina">Argentina</option>
+                        <option value="chile">Chile</option>
+                        <option value="peru">Perú</option>
+                    </select>
                 </div>
                 <button type="submit" class="btn">Registrarse</button>
-                <div class="switch-link"><a onclick="showLogin()">¿Ya tienes cuenta? Inicia Sesión</a></div>
+                <div class="switch-link">
+                    <a onclick="showLogin()">¿Ya tienes cuenta? Inicia Sesión</a>
+                </div>
             </form>
             <div id="registerError" class="error-message hidden"></div>
         </div>
@@ -195,6 +374,8 @@
         }
         createParticles();
 
+        const API_BASE_URL = '/api';
+
         function mostrarMensaje(mensaje, tipo) {
             const toast = document.createElement('div');
             toast.className = `toast ${tipo}`;
@@ -214,38 +395,61 @@
             document.getElementById('registerPanel').classList.remove('hidden');
         }
 
-        // SIMULACIÓN: Guarda usuario en localStorage y redirige
-        document.getElementById('registerForm').addEventListener('submit', (e) => {
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             const userData = {
                 first_name: document.getElementById('regNombre').value,
                 last_name: document.getElementById('regApellido').value,
                 email: document.getElementById('regEmail').value,
+                password: document.getElementById('regPassword').value,
                 profile: document.getElementById('regProfile').value,
                 country: document.getElementById('regCountry').value
             };
-            localStorage.setItem('simulated_user', JSON.stringify(userData));
-            mostrarMensaje('Usuario registrado exitosamente (simulado)', 'success');
-            showLogin();
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/register`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(userData)
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Error al registrar');
+                mostrarMensaje('Usuario registrado exitosamente', 'success');
+                showLogin();
+            } catch (error) {
+                document.getElementById('registerError').textContent = error.message;
+                document.getElementById('registerError').classList.remove('hidden');
+                setTimeout(() => document.getElementById('registerError').classList.add('hidden'), 3000);
+            }
         });
 
-        document.getElementById('loginForm').addEventListener('submit', (e) => {
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('loginEmail').value;
-            // Crear usuario simulado
-            const simulatedUser = {
-                id: 1,
-                first_name: email.split('@')[0] || 'Usuario',
-                last_name: 'Demo',
-                email: email,
-                profile: 'both'
+            const credentials = {
+                email: document.getElementById('loginEmail').value,
+                password: document.getElementById('loginPassword').value
             };
-            localStorage.setItem('token', 'simulado_token');
-            localStorage.setItem('user', JSON.stringify(simulatedUser));
-            mostrarMensaje(`Bienvenido ${simulatedUser.first_name}!`, 'success');
-            setTimeout(() => {
-                window.location.href = 'curso-residentes.html';
-            }, 1000);
+
+            try {
+                const response = await fetch(`${API_BASE_URL}/auth/login`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(credentials)
+                });
+                const data = await response.json();
+                if (!response.ok) throw new Error(data.error || 'Credenciales inválidas');
+                
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify(data.user));
+                mostrarMensaje(`Bienvenido ${data.user.first_name}!`, 'success');
+                setTimeout(() => {
+                    window.location.href = 'curso-residentes.html';
+                }, 1000);
+            } catch (error) {
+                document.getElementById('loginError').textContent = error.message;
+                document.getElementById('loginError').classList.remove('hidden');
+                setTimeout(() => document.getElementById('loginError').classList.add('hidden'), 3000);
+            }
         });
     </script>
 </body>
