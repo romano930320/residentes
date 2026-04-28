@@ -32,7 +32,7 @@ Firma Digital - ExamenNetser
             },
             body: JSON.stringify({
                 Title: `Certificado Residentes Netser - ${nombreCompleto}`,
-                Message: `Hola ${nombreCompleto}, completa tu firma digital.`,
+                Message: `Hola ${nombreCompleto}, completa tu firma digital para certificar la finalización del curso.`,
                 Signers: [{ Name: nombreCompleto, EmailAddress: email, SignerOrder: 1 }],
                 CC: [{ EmailAddress: adminEmail }],
                 Files: [{
