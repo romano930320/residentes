@@ -1,6 +1,7 @@
 import { Pool } from '@neondatabase/serverless';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+
 const pool = new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false }
@@ -19,7 +20,7 @@ export default async function handler(req, res) {
         }
 
         const result = await pool.query(
-            'SELECT id, first_name, last_name, email, password, profile FROM evaluaciones_tecnicas.users WHERE email = $1',
+            'SELECT id, first_name, last_name, email, password, profile FROM public.users WHERE email = $1',
             [email.toLowerCase()]
         );
 
