@@ -35,7 +35,7 @@ export default async function handler(req, res) {
         });
 
         const pdfBytes = await pdfDoc.save();
-        const pdfBase64 = Buffer.from(pdfBytes).toString('base64');
+        const pdfBase64 = `data:application/pdf;base64,${Buffer.from(pdfBytes).toString('base64')}`;
 
         const requestBody = {
             Title: `Certificado - ${nombreCompleto}`,
