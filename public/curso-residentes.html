@@ -60,14 +60,14 @@
             z-index: 0;
         }
 
-        /* ── NAVBAR ── */
+        /* ── NAVBAR BLANCO ── */
         .navbar {
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(0, 48, 157, 0.85);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--border);
+            background: white;
+            backdrop-filter: blur(0);
+            border-bottom: 1px solid rgba(0,48,157,0.1);
             padding: 0 2rem;
             height: 62px;
             display: flex;
@@ -75,7 +75,7 @@
             justify-content: space-between;
         }
 
-        .logo { height: 36px; filter: brightness(1.1); }
+        .logo { height: 36px; filter: none; }
 
         .nav-right {
             display: flex;
@@ -87,12 +87,12 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            background: rgba(51,153,225,0.15);
-            border: 1px solid var(--border);
+            background: rgba(0,48,157,0.08);
+            border: 1px solid rgba(0,48,157,0.15);
             padding: 5px 12px 5px 10px;
             border-radius: 100px;
             font-size: 12px;
-            color: var(--accent);
+            color: #00309D;
             font-weight: 600;
         }
 
@@ -100,8 +100,8 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background: rgba(170, 173, 175, 0.15);
-            border: 1px solid var(--border);
+            background: rgba(0,48,157,0.06);
+            border: 1px solid rgba(0,48,157,0.15);
             padding: 4px 12px 4px 6px;
             border-radius: 100px;
         }
@@ -119,11 +119,11 @@
             font-family: 'Outfit', sans-serif;
         }
 
-        #userName { font-size: 13px; font-weight: 600; color: var(--text); }
+        #userName { font-size: 13px; font-weight: 600; color: #1e293b; }
 
         .logout-btn {
             background: none; border: none;
-            color: var(--muted); cursor: pointer;
+            color: #94a3b8; cursor: pointer;
             padding: 4px 6px; border-radius: 6px;
             font-size: 12px; transition: color 0.15s;
         }
@@ -150,7 +150,7 @@
         .hero h1 {
             font-family: 'Outfit', sans-serif;
             font-size: clamp(1.4rem, 2.5vw, 1.9rem);
-            font-weight: 700; color: #fff; line-height: 1.2;
+            font-weight: 700; color: white; line-height: 1.2;
         }
 
         .hero h1 span {
