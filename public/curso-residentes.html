@@ -8,18 +8,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --blue: #2563eb;
-            --blue-mid: #1d4ed8;
-            --blue-dark: #1e3a8a;
-            --accent: #38bdf8;
-            --bg: #060d1f;
+            --blue: #00309D;
+            --blue-mid: #00309D;
+            --blue-dark: #002070;
+            --accent: #3399E1;
+            --bg: #00309D;
             --surface: #0d1730;
-            --card: #111d36;
-            --card2: #0f1a30;
-            --border: rgba(37,99,235,0.18);
-            --border2: rgba(56,189,248,0.12);
+            --card: rgba(170, 173, 175, 0.1);
+            --card2: rgba(170, 173, 175, 0.05);
+            --border: rgba(51, 153, 225, 0.25);
+            --border2: rgba(51, 153, 225, 0.15);
             --text: #e2e8f0;
-            --muted: #64748b;
+            --muted: #AAADAF;
             --green: #22c55e;
             --green-dim: rgba(34,197,94,0.12);
             --red: #ef4444;
@@ -29,7 +29,7 @@
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--bg);
+            background: linear-gradient(135deg, #00309D 0%, #00309D 40%, #3399E1 100%);
             color: var(--text);
             min-height: 100vh;
             overflow-x: hidden;
@@ -40,8 +40,8 @@
             position: fixed;
             inset: 0;
             background-image:
-                linear-gradient(rgba(37,99,235,0.04) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(37,99,235,0.04) 1px, transparent 1px);
+                linear-gradient(rgba(51,153,225,0.08) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(51,153,225,0.08) 1px, transparent 1px);
             background-size: 40px 40px;
             pointer-events: none;
             z-index: 0;
@@ -55,7 +55,7 @@
             transform: translateX(-50%);
             width: 900px;
             height: 500px;
-            background: radial-gradient(ellipse, rgba(37,99,235,0.15) 0%, transparent 70%);
+            background: radial-gradient(ellipse, rgba(51,153,225,0.15) 0%, transparent 70%);
             pointer-events: none;
             z-index: 0;
         }
@@ -65,7 +65,7 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            background: rgba(6,13,31,0.85);
+            background: rgba(0, 48, 157, 0.85);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--border);
             padding: 0 2rem;
@@ -87,7 +87,7 @@
             display: flex;
             align-items: center;
             gap: 6px;
-            background: rgba(37,99,235,0.15);
+            background: rgba(51,153,225,0.15);
             border: 1px solid var(--border);
             padding: 5px 12px 5px 10px;
             border-radius: 100px;
@@ -100,7 +100,7 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            background: var(--card);
+            background: rgba(170, 173, 175, 0.15);
             border: 1px solid var(--border);
             padding: 4px 12px 4px 6px;
             border-radius: 100px;
@@ -108,7 +108,7 @@
 
         .user-avatar {
             width: 28px; height: 28px;
-            background: linear-gradient(135deg, var(--blue), var(--accent));
+            background: linear-gradient(135deg, #00309D, #3399E1);
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -138,7 +138,7 @@
 
         .hero-label {
             display: inline-flex; align-items: center; gap: 6px;
-            background: rgba(56,189,248,0.08);
+            background: rgba(51,153,225,0.08);
             border: 1px solid var(--border2);
             color: var(--accent);
             padding: 4px 12px; border-radius: 100px;
@@ -154,7 +154,7 @@
         }
 
         .hero h1 span {
-            background: linear-gradient(90deg, var(--blue) 0%, var(--accent) 100%);
+            background: linear-gradient(90deg, #00309D 0%, #3399E1 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -176,10 +176,11 @@
 
         /* ── CARDS ── */
         .card {
-            background: var(--card);
+            background: rgba(170, 173, 175, 0.1);
+            backdrop-filter: blur(4px);
             border: 1px solid var(--border);
             border-radius: 18px; overflow: hidden;
-            box-shadow: 0 0 0 1px rgba(0,0,0,0.3), 0 20px 40px rgba(0,0,0,0.3);
+            box-shadow: 0 0 0 1px rgba(0,0,0,0.1), 0 20px 40px rgba(0,0,0,0.2);
             animation: fadeUp 0.5s ease both;
         }
         .card:nth-child(2) { animation-delay: 0.08s; }
@@ -193,7 +194,7 @@
             padding: 14px 18px;
             border-bottom: 1px solid var(--border);
             display: flex; align-items: center; justify-content: space-between;
-            background: var(--card2);
+            background: rgba(0, 48, 157, 0.3);
         }
 
         .card-title {
@@ -224,7 +225,7 @@
 
         .progress-wrap {
             padding: 14px 18px;
-            background: var(--card2);
+            background: rgba(0, 48, 157, 0.2);
             border-top: 1px solid var(--border);
         }
 
@@ -240,14 +241,14 @@
         }
 
         .progress-track {
-            height: 4px; background: rgba(255,255,255,0.06);
+            height: 4px; background: rgba(255,255,255,0.1);
             border-radius: 100px; overflow: hidden;
         }
         .progress-fill {
             height: 100%; width: 0%;
-            background: linear-gradient(90deg, var(--blue), var(--accent));
+            background: linear-gradient(90deg, #00309D, #3399E1);
             border-radius: 100px; transition: width 0.4s ease;
-            box-shadow: 0 0 8px rgba(56,189,248,0.4);
+            box-shadow: 0 0 8px rgba(51,153,225,0.4);
         }
 
         .status-bar {
@@ -255,7 +256,7 @@
             display: flex; align-items: center; gap: 8px;
             border-top: 1px solid var(--border); letter-spacing: 0.01em;
         }
-        .status-bar.pending { background: rgba(37,99,235,0.08); color: #93c5fd; }
+        .status-bar.pending { background: rgba(51,153,225,0.1); color: var(--accent); }
         .status-bar.completed {
             background: var(--green-dim); color: var(--green);
             border-top-color: rgba(34,197,94,0.2);
@@ -282,7 +283,7 @@
             border: 1.5px solid var(--border);
             display: flex; align-items: center; justify-content: center;
             font-size: 9px; font-weight: 700; color: var(--muted);
-            flex-shrink: 0; background: var(--card2);
+            flex-shrink: 0; background: rgba(0, 48, 157, 0.3);
             transition: all 0.3s; position: relative; z-index: 1;
         }
         .step.done .step-icon {
@@ -290,9 +291,9 @@
             border-color: rgba(34,197,94,0.4); color: var(--green);
         }
         .step.active .step-icon {
-            background: rgba(37,99,235,0.2);
-            border-color: var(--blue); color: var(--accent);
-            box-shadow: 0 0 12px rgba(37,99,235,0.3);
+            background: rgba(51,153,225,0.2);
+            border-color: #3399E1; color: #3399E1;
+            box-shadow: 0 0 12px rgba(51,153,225,0.3);
         }
 
         .step-text { font-size: 12px; color: var(--muted); padding-top: 4px; line-height: 1.3; }
@@ -310,30 +311,30 @@
         }
         .form-group input {
             width: 100%; padding: 9px 12px;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.05);
             border: 1px solid var(--border); border-radius: 10px;
             font-size: 13px; font-family: 'Plus Jakarta Sans', sans-serif;
             color: var(--text); outline: none;
             transition: border-color 0.15s, box-shadow 0.15s;
         }
         .form-group input:focus {
-            border-color: var(--blue);
-            box-shadow: 0 0 0 3px rgba(37,99,235,0.15);
-            background: rgba(37,99,235,0.06);
+            border-color: #3399E1;
+            box-shadow: 0 0 0 3px rgba(51,153,225,0.15);
+            background: rgba(51,153,225,0.06);
         }
         .form-group input:disabled { opacity: 0.4; cursor: not-allowed; }
         .form-group input::placeholder { color: var(--muted); opacity: 0.5; }
 
         .sign-btn {
             width: 100%; padding: 11px;
-            background: linear-gradient(135deg, var(--blue), var(--blue-mid));
+            background: linear-gradient(135deg, #00309D, #3399E1);
             color: white; border: none; border-radius: 12px;
             font-size: 13px; font-weight: 700;
             font-family: 'Plus Jakarta Sans', sans-serif;
             cursor: pointer; display: flex; align-items: center;
             justify-content: center; gap: 8px;
             transition: all 0.2s;
-            box-shadow: 0 4px 16px rgba(37,99,235,0.35);
+            box-shadow: 0 4px 16px rgba(0,48,157,0.35);
             position: relative; overflow: hidden;
         }
         .sign-btn::before {
@@ -345,10 +346,10 @@
         .sign-btn:hover:not(:disabled)::before { left: 100%; }
         .sign-btn:hover:not(:disabled) {
             transform: translateY(-1px);
-            box-shadow: 0 8px 24px rgba(37,99,235,0.45);
+            box-shadow: 0 8px 24px rgba(0,48,157,0.45);
         }
         .sign-btn:disabled {
-            background: rgba(255,255,255,0.06);
+            background: rgba(170,173,175,0.3);
             color: var(--muted); cursor: not-allowed; box-shadow: none;
         }
 
@@ -361,7 +362,8 @@
         /* ── TOAST ── */
         .toast {
             position: fixed; bottom: 24px; right: 24px;
-            background: var(--card); border: 1px solid var(--border);
+            background: rgba(0,48,157,0.95);
+            border: 1px solid var(--border);
             border-radius: 12px; padding: 12px 18px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.4);
             transform: translateY(80px); opacity: 0;
@@ -378,7 +380,7 @@
 <body>
 
     <nav class="navbar">
-        <img src="https://exam-netser.vercel.app/assets/logo.png" alt="Netser" class="logo" onerror="this.style.display='none'">
+        <img src="/assets/logocolorcongroup.png" alt="Netser" class="logo" onerror="this.style.display='none'">
         <div class="nav-right">
             <div class="nav-badge">
                 <i class="fas fa-graduation-cap"></i> Curso Residentes
